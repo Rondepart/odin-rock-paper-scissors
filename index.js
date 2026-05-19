@@ -1,7 +1,5 @@
-console.log("Hello World!");
-
-const humanScore = 0;
-const computerScore = 0;
+let humanScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
     let rndmNum = Math.floor(Math.random() * 3) + 1;
@@ -25,42 +23,61 @@ function playRound(humanChoice, computerChoice) {
     const normalizedHumanChoice = humanChoice.toLowerCase().replace(/\s+/g, '');
 
     if (normalizedHumanChoice === computerChoice){
-        return console.log("Tied you and the computer choiced " + computerChoice + ".");
+        console.log("Tied you and the computer choiced " + computerChoice + ".");
 
     } else if (normalizedHumanChoice === "rock" && computerChoice === "scissors") {
         humanScore++;
-        return console.log("You win, computer choose scissors.");
+        console.log("You win, computer choose scissors.");
 
     } else if (normalizedHumanChoice === "rock" && computerChoice === "paper") {
         computerScore++;
-        return console.log("You lose, computer choose paper.");
+        console.log("You lose, computer choose paper.");
 
     } else if (normalizedHumanChoice === "paper" && computerChoice === "scissors") {
         computerScore++;
-        return console.log("You lose, computer choose scissors.");
+        console.log("You lose, computer choose scissors.");
 
     } else if (normalizedHumanChoice === "paper" && computerChoice === "rock") {
         humanScore++;
-        return console.log("You win, computer choose rock.");
+        console.log("You win, computer choose rock.");
 
     } else if (normalizedHumanChoice === "scissors" && computerChoice === "rock") {
         computerScore++;
-        return console.log("You lose, computer choose rock.");
+        console.log("You lose, computer choose rock.");
 
     } else if (normalizedHumanChoice === "scissors" && computerChoice === "paper") {
         humanScore++;
-        return console.log("You win, computer choose paper.");
+        console.log("You win, computer choose paper.");
     } else {
-        return console.log("You entered an invalid choice");
+        console.log("You entered an invalid choice");
     }
 
     // return console.log(normalizedHumanChoice + computerChoice);
 } 
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+function playGame() {
+    for (let roundCount = 0; roundCount<5; roundCount++) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
+    }
+        
+    if (humanScore === computerScore) {
+        console.log("Tie!!! you scored: " + humanScore + " | Computer Scored: " + computerScore);
 
-playRound(humanSelection, computerSelection);
+    } else if (humanScore < computerScore) {
+        console.log("GGWP You lost you scored: " + humanScore + " | Computer Scored: " + computerScore);
+
+    } else {
+        console.log("GGWP You win you scored: " + humanScore + " | Computer Scored: " + computerScore);
+    }
+
+    humanScore = 0;
+    computerScore = 0;
+}
+
+
+playGame();
 
 // getComputerChoice();
 // getHumanChoice();
